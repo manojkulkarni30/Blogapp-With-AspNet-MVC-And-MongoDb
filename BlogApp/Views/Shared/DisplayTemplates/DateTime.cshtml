@@ -1,0 +1,11 @@
+﻿@model DateTime
+@using Humanizer
+
+@if ((Model.Day - DateTime.UtcNow.Day) < 3)
+{
+    @Model.Humanize()
+}
+else
+{
+    @Model
+}

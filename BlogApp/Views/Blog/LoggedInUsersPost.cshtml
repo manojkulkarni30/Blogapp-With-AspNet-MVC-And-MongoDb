@@ -1,0 +1,52 @@
+﻿@using BlogApp.Extensions
+@using BlogAppWithMongoDB.Models
+@using PagedList.Mvc
+@model PagedList.IPagedList<BlogAppWithMongoDB.Models.Blog>
+
+@{
+    ViewBag.Title = "My Post";
+}
+
+<div class="page-header">
+    <h1>My Posts</h1>
+    <hr />
+    @foreach (Blog blog in Model)
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="well">
+                    <a href="@Url.Action("ViewPost", "Blog", new {seoname = blog.SeoName})"><h2>@blog.Title</h2></a>
+                    <i class="fa fa-user">&nbsp;@blog.AuthorName</i>&nbsp;&nbsp;<i class="fa fa-calendar">@Html.DisplayFor(item => blog.DatePublished)</i>&nbsp;&nbsp;<i class="fa fa-comment">@blog.Comments.Count</i>
+                    <hr />
+                    @Html.Raw(blog.Summary)
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="pull-left">
+                                <i class="fa fa-tags"></i>&nbsp;@String.Join(",", blog.Tags)
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="pull-right">
+                                <a href="@Url.Action("ViewPost", "Blog", new {seoname = blog.SeoName})" class="btn btn-primary">Read More <i class="fa fa-arrow-right"></i></a>
+                                @if (User.Identity.GetFullName().ToLower() == blog.AuthorName.ToLower())
+                                {
+                                    <a href="@Url.Action("Edit", "Blog", new {id = blog.Id})" class="btn btn-primary">Edit <i class="fa fa-edit"></i></a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="text-center">
+        @Html.PagedListPager(Model, page => Url.Action("LoggedInUsersPost",
+            new {page}))
+    </div>
+</div>
+
+@section head
+{
+    <link href="~/Content/PagedList.min.css" rel="stylesheet" />
+}

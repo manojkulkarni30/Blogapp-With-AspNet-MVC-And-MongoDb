@@ -1,0 +1,22 @@
+﻿@model List<BlogAppWithMongoDB.Models.Comment>
+
+@if (Model.Any())
+{
+    foreach (var comment in Model)
+    {
+        <div class="row well">
+            <div class="col-md-1">
+                @Html.Gravatar(@comment.Email, 80, new { Title = "Blog App", Alt = "Gravatar" })
+            </div>
+            <div class="col-md-11">
+                <h4 class="list-group-item-heading">@comment.Name</h4>
+                <p class="list-group-item-text">@comment.Message</p>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <h4>No comments yet</h4>
+}
+

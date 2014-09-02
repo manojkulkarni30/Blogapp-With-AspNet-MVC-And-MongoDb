@@ -1,0 +1,29 @@
+body {
+    background-color: #FFFFFF;
+    color: #000000;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    -ms-scrollbar-3dlight-color: #F0F0EE;
+    scrollbar-3dlight-color: #F0F0EE;
+    -ms-scrollbar-arrow-color: #676662;
+    scrollbar-arrow-color: #676662;
+    -ms-scrollbar-base-color: #F0F0EE;
+    scrollbar-base-color: #F0F0EE;
+    -ms-scrollbar-darkshadow-color: #DDDDDD;
+    scrollbar-darkshadow-color: #DDDDDD;
+    -ms-scrollbar-face-color: #E0E0DD;
+    scrollbar-face-color: #E0E0DD;
+    -ms-scrollbar-highlight-color: #F0F0EE;
+    scrollbar-highlight-color: #F0F0EE;
+    -ms-scrollbar-shadow-color: #F0F0EE;
+    scrollbar-shadow-color: #F0F0EE;
+    -ms-scrollbar-track-color: #F5F5F5;
+    scrollbar-track-color: #F5F5F5;
+}
+
+td, th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+}
+
+@import "Content.Objects.less";

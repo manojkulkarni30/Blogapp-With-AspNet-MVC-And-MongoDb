@@ -1,0 +1,56 @@
+﻿@using BlogApp.ViewModels
+@model BlogAppWithMongoDB.Models.Blog
+@{
+    ViewBag.Title = "Post -" + Model.Title;
+}
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="well">
+                <a href="@Url.Action("Index","Blog")" class="btn btn-primary"><i class="fa fa-arrow-left"></i>&nbsp; Back</a>
+                <h1>@Model.Title</h1>
+                <hr />
+                <i class="fa fa-user">&nbsp;@Model.AuthorName</i>&nbsp;&nbsp;<i class="fa fa-calendar">@Html.DisplayFor(item => Model.DatePublished)</i>&nbsp;&nbsp;<i class="fa fa-comment">@Model.Comments.Count</i>
+                <hr />
+                @Html.Raw(Model.Description)
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-left">
+                            <i class="fa fa-tags"></i>&nbsp;@String.Join(",", Model.Tags)
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                @if (Model.Comments.Any() || Model.IsCommentAllowed)
+                {
+                    <h2>Comments</h2>
+                    <hr />
+                    <div id="comments">
+                        @Html.Partial("_Comments", Model.Comments.AsQueryable().OrderByDescending(c => c.DateCreated).ToList())
+                    </div>
+                    <img src="@Url.Content("~/Content/ajax-loader.gif")" alt="Hide Image" data-loading="yes" class="hideContent" />
+                    <hr/>
+                }
+                @if (Model.IsCommentAllowed)
+                {
+                    <h2>Add New Comment</h2>
+                    <hr />
+                    @Html.Partial("_AddComment", new CommentViewModel {Id = Model.Id})
+                }
+                else
+                {
+                    <h3>Comments are Closed</h3>
+                }
+                <a href="@Url.Action("Index","Blog")" class="btn btn-primary"><i class="fa fa-arrow-left"></i>&nbsp; Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src=@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")></script>
+    <script src=@Url.Content("~/Scripts/viewBlog.min.js")></script>
+}

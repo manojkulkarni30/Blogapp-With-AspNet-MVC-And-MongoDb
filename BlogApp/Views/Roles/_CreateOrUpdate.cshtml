@@ -1,0 +1,9 @@
+﻿@model BlogApp.ViewModels.RoleViewModel
+           
+<div class="form-group">
+    @Html.LabelFor(model => model.RoleName, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.RoleName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+    </div>
+</div>
