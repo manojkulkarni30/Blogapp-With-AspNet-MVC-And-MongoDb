@@ -1,36 +1,45 @@
 ﻿@model BlogApp.ViewModels.CommentViewModel
-           
-@using (Ajax.BeginForm("AddComment", "Blog", null, new AjaxOptions() { HttpMethod = "post",OnBegin = "onBegin",OnSuccess = "onSuccess",OnFailure = "onFailure"}, new { @class = "form-horizontal", role = "form" }))
+
+@if (User.Identity.IsAuthenticated)
 {
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(model=>model.Id)
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <fieldset>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    <h2>Add New Comment</h2>
+    <hr />
+    using (Ajax.BeginForm("AddComment", "Blog", null, new AjaxOptions() { HttpMethod = "post", OnBegin = "onBegin", OnSuccess = "onSuccess", OnFailure = "onFailure" }, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <fieldset>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-            <div class="col-lg-10">
-                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                <div class="col-lg-10">
+                    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Message, new { @class = "col-md-2 control-label" })
-            <div class="col-lg-10">
-                @Html.TextAreaFor(m => m.Message, new { @class = "form-control", rows = "3" })
-                @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Message, new { @class = "col-md-2 control-label" })
+                <div class="col-lg-10">
+                    @Html.TextAreaFor(m => m.Message, new { @class = "form-control", rows = "3" })
+                    @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-                <button type="submit" class="btn btn-primary">Add Comment</button>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-primary">Add Comment</button>
+                </div>
             </div>
-        </div>
-    </fieldset>
+        </fieldset>
+    }
+}
+else
+{
+    <h3>You need to login to add comment</h3>
 }

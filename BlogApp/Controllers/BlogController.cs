@@ -110,6 +110,7 @@ namespace BlogApp.Controllers
             return View(blog);
         }
 
+        [AllowAnonymous]
         public ActionResult ViewPost(string seoName)
         {
             if (String.IsNullOrWhiteSpace(seoName))

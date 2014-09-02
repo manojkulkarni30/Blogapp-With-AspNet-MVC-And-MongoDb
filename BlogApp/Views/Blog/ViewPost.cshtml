@@ -35,8 +35,6 @@
                 }
                 @if (Model.IsCommentAllowed)
                 {
-                    <h2>Add New Comment</h2>
-                    <hr />
                     @Html.Partial("_AddComment", new CommentViewModel {Id = Model.Id})
                 }
                 else
