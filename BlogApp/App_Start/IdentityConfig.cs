@@ -30,7 +30,7 @@ namespace BlogApp
             msg.Subject = message.Subject;
             msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
             msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
-            var smtpClient = new SmtpClient("SMTp Server", Convert.ToInt32(587));
+            var smtpClient = new SmtpClient("SMTP Server", Convert.ToInt32(587));
             var credentials = new NetworkCredential("Username", "password");
             smtpClient.Credentials = credentials;
             smtpClient.EnableSsl = true;
